@@ -1,15 +1,13 @@
 package utils
 
 import (
+	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/ssh"
 	"log"
+	"net/http"
 )
 
-func Connaction() {
-	server := "150.158.140.243:22"
-	user := "root"
-	password := "921226LWJlwj"
-
+func Connaction(c *gin.Context, server, user, password string) {
 	//SSH配置
 	config := &ssh.ClientConfig{
 		User: user,
@@ -23,6 +21,9 @@ func Connaction() {
 	client, err := ssh.Dial("tcp", server, config)
 	if err != nil {
 		log.Fatalf("连接失败: %v", err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "连接失败",
+		})
 	}
 	defer client.Close()
 
@@ -33,10 +34,13 @@ func Connaction() {
 
 	// }
 	// defer client.Close()
+	c.JSON(http.StatusOK, gin.H{
+		"message": "连接成功",
+	})
 
-	remotePath := "/data/frontend/dist"
-	localPath := "/Users/doususu/frontend/dist"
-	downloadFolder(client,remotePath,localPath)
+	// remotePath := "/data/frontend/dist"
+	// localPath := "/Users/doususu/frontend/dist"
+	// downloadFolder(client,remotePath,localPath)
 
 	// //执行远程命令
 	// output, err := seesion.CombinedOutput(GetCli())

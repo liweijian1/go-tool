@@ -1,9 +1,11 @@
 package main
 
 import (
-	"gotool/utils"
+	//"gotool/utils"
+	"gotool/api"
 )
 
 func main() {
-	utils.Connaction()
+	//utils.Connaction()
+	api.CreateApi()
 }
