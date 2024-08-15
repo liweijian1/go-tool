@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"golang.org/x/crypto/ssh"
 	"log"
 )
@@ -28,19 +27,23 @@ func Connaction() {
 	defer client.Close()
 
 	//打开一个会话
-	seesion, err := client.NewSession()
-	if err != nil {
-		log.Fatalf("创建会话失败: %v", err)
+	// seesion, err := client.NewSession()
+	// if err != nil {
+	// 	log.Fatalf("创建会话失败: %v", err)
 
-	}
-	defer client.Close()
+	// }
+	// defer client.Close()
 
-	//执行远程命令
-	output, err := seesion.CombinedOutput("ls")
-	if err != nil {
-		log.Fatalf("执行命令失败: %v", err)
+	remotePath := "/data/frontend/dist"
+	localPath := "/frontend/dist"
+	downloadFolder(client,remotePath,localPath)
 
-	}
-	//打印命令输出
-	fmt.Println(string(output))
+	// //执行远程命令
+	// output, err := seesion.CombinedOutput(GetCli())
+	// if err != nil {
+	// 	log.Fatalf("执行命令失败: %v", err)
+
+	// }
+	// //打印命令输出
+	// fmt.Println(string(output))
 }
