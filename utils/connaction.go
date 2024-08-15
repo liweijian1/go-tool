@@ -35,7 +35,7 @@ func Connaction() {
 	// defer client.Close()
 
 	remotePath := "/data/frontend/dist"
-	localPath := "/frontend/dist"
+	localPath := "/Users/doususu/frontend/dist"
 	downloadFolder(client,remotePath,localPath)
 
 	// //执行远程命令
