@@ -8,6 +8,7 @@ import (
 
 func connactionService(router *gin.Engine) error {
 	router.POST("/connaction", func(c *gin.Context) {
+		
 		server := c.PostForm("server")
 		if server == "" {
 			c.JSON(http.StatusBadRequest, gin.H{"message": "缺少server"})
@@ -20,10 +21,11 @@ func connactionService(router *gin.Engine) error {
 		}
 		password := c.PostForm("password")
 		if password == "" {
-			c.JSON(http.StatusBadRequest, gin.H{"message": "缺少user"})
+			c.JSON(http.StatusBadRequest, gin.H{"message": "缺少password"})
 			return
 		}
 		utils.Connaction(c, server, user, password)
-		retrun nil
+		
 	})
+	return nil
 }

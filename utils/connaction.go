@@ -20,10 +20,13 @@ func Connaction(c *gin.Context, server, user, password string) {
 	//连接到服务器
 	client, err := ssh.Dial("tcp", server, config)
 	if err != nil {
-		log.Fatalf("连接失败: %v", err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "连接失败",
+			"error":   err.Error(),
 		})
+		log.Println("连接失败: %v", err)
+		return
+
 	}
 	defer client.Close()
 
