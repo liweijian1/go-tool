@@ -5,14 +5,17 @@ import (
 	"golang.org/x/crypto/ssh"
 	"log"
 	"net/http"
+	"strings"
 )
 
-func Connaction(c *gin.Context, server, user, password string) {
+func Connaction(c *gin.Context, server,user, password string) {
+	// user := "root"
+	// password := "921226LWJlwj"
 	//SSH配置
 	config := &ssh.ClientConfig{
-		User: user,
+		User: strings.TrimSpace(user),
 		Auth: []ssh.AuthMethod{
-			ssh.Password(password),
+			ssh.Password(strings.TrimSpace(password)),
 		},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}

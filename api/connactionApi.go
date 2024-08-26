@@ -24,7 +24,8 @@ func connactionService(router *gin.Engine) error {
 			c.JSON(http.StatusBadRequest, gin.H{"message": "缺少password"})
 			return
 		}
-		utils.Connaction(c, server, user, password)
+	
+		utils.Connaction(c, server,user,password)
 		
 	})
 	return nil
